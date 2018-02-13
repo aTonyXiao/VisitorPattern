@@ -66,6 +66,7 @@ public class SingletonCheckerVisitor {
     }
 
     public boolean gradeD() {
-        return SingletonCheckerVisitor.methodVisitor.callConstructorOnce() && (SingletonCheckerVisitor.numConstructor == 1);
+        return SingletonCheckerVisitor.methodVisitor.callConstructorOnce()
+                && (SingletonCheckerVisitor.numConstructor == 1);
     }
 }

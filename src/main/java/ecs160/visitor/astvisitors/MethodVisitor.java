@@ -69,16 +69,6 @@ public class MethodVisitor extends ASTVisitor {
 
     }
 
-
-//	public boolean visit(ClassInstanceCreation node) {
-//		CheckConstructor totalConstructor = new CheckConstructor();
-//		node.accept(totalConstructor);
-//		constructorNum = totalConstructor.count;
-//		return false;
-//	}
-
-
-
     public boolean hasPrivateConstruct() {
 	    return hasPrivateConstruct;
     }

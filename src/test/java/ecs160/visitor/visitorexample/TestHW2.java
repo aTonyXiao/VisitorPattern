@@ -6,12 +6,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ecs160.visitor.astvisitors.SingletonCheckerVisitor;
-//import ecs160.visitor.astvisitors.StateCheckerVisitor;
+import ecs160.visitor.astvisitors.StateCheckerVisitor;
 
 public class TestHW2 {
 	
 	public static SingletonCheckerVisitor q1Grader;
-//	public static StateCheckerVisitor q2Grader;
+	public static StateCheckerVisitor q2Grader;
 
 	@BeforeClass
 	public static void setUp()
@@ -35,8 +35,10 @@ public class TestHW2 {
 		 * will also check these.
 		 */
 		q1Grader = SingletonCheckerVisitor.setUpGrader("src/ECS160HW1Reference/src/hw1/DatabaseManager.java", "DatabaseManager");
-//		q2Grader = StateCheckerVisitor.setUpGrader("../ECS160HW1Reference/src/hw1/LibraryBook.java", "LibraryBook",
-//											"../ECS160HW1Reference/src/hw1/LBState.java", "LBState");
+
+
+		q2Grader = StateCheckerVisitor.setUpGrader("src/ECS160HW1Reference/src/hw1/LibraryBook.java", "LibraryBook",
+											"src/ECS160HW1Reference/src/hw1/LBState.java", "LBState");
 		System.out.println(q1Grader);
 	}
 	
@@ -78,22 +80,22 @@ public class TestHW2 {
 		assertTrue(q1Grader.gradeD());
 	}
 	
-//	@Test
+	@Test
 	/**
 	 * Check that the CONTEXT has matching method names for each of methods in ABSTRACTSTATE.
 	 */
-//	public void Question2a()
-//	{
-//		assertTrue(q2Grader.gradeA());
-//	}
+	public void Question2a()
+	{
+		assertTrue(q2Grader.gradeA());
+	}
 	
-//	@Test
+	@Test
 	/**
 	 * Check that each of the CONTEXT methods calls the correct ABSTRACTSTATE method. 
 	 * Return an integer that matches the number of methods correctly matched.
 	 */
-//	public void Question2b()
-//	{
-//		assertEquals(q2Grader.gradeB(), 4);
-//	}
+	public void Question2b()
+	{
+		assertEquals(q2Grader.gradeB(), 4);
+	}
 }
