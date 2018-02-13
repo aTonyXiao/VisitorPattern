@@ -5,14 +5,12 @@ import java.util.List;
 
 import org.eclipse.jdt.core.dom.*;
 
-import ecs160.visitor.utilities.ASTNodeTypePrinter;
-
 /**
  * Class to print out information about every method
  * declaration we visit in the AST.
  *
  */
-public class MethodPrinter extends ASTVisitor {
+public class MethodVisitor extends ASTVisitor {
 	
 	private boolean hasPrivateConstruct = false;
     private boolean publicStaticMethod = false;
@@ -40,10 +38,10 @@ public class MethodPrinter extends ASTVisitor {
 		if(findPublicStatic[0] && findPublicStatic[1]) {
 			if (node.getReturnType2().toString().equals("DatabaseManager")) // since it only for hw1 otherwise check it in "SingletonCheckerVisitor"
 				publicStaticMethod = true;
-			IfPrinter ifPrinter = new IfPrinter();
-			node.accept(ifPrinter);
+			IfVisitor ifVisitor = new IfVisitor();
+			node.accept(ifVisitor);
 
-			if(ifPrinter.callConstructor) {
+			if(ifVisitor.callConstructor) {
 				callConstructor = true;
 			}
 		}

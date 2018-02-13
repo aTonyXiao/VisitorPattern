@@ -10,7 +10,7 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
-import ecs160.visitor.astvisitors.MethodPrinter;
+import ecs160.visitor.astvisitors.MethodVisitor;
 import ecs160.visitor.utilities.UtilReader;
 
 /**
@@ -47,7 +47,7 @@ public class App
 	    	parser.setUnitName(file.getAbsolutePath()); //Load in the absolute path of the file to parse
 	    	CompilationUnit cu = (CompilationUnit) parser.createAST(null); //Create the tree and link to the root node.
 	    	
-	    	cu.accept(new MethodPrinter()); //Begin searching the tree for method declarations.   
+	    	cu.accept(new MethodVisitor()); //Begin searching the tree for method declarations.
     }
     
 }

@@ -12,7 +12,7 @@ import ecs160.visitor.utilities.ASTNodeTypePrinter;
  * including the expression, the body of the if, and the body of the 'else'.
  *
  */
-public class IfPrinter extends ASTVisitor{
+public class IfVisitor extends ASTVisitor{
 
 	public boolean callConstructor = false;
 	

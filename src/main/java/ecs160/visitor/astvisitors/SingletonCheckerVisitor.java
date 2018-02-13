@@ -12,7 +12,7 @@ import java.util.Map;
 public class SingletonCheckerVisitor {
     private static String filename;
     private static File file;
-    static MethodPrinter methodPrinter;
+    static MethodVisitor methodVisitor;
     static int numConstructor;
 
     public static SingletonCheckerVisitor setUpGrader(String filePath, String fileName){
@@ -42,9 +42,9 @@ public class SingletonCheckerVisitor {
         parser.setUnitName(file.getAbsolutePath());
         CompilationUnit cu = (CompilationUnit) parser.createAST(null);
 
-        methodPrinter = new MethodPrinter();
+        methodVisitor = new MethodVisitor();
 
-        cu.accept(methodPrinter);
+        cu.accept(methodVisitor);
 
         CheckConstructor totalConstructor = new CheckConstructor();
         cu.accept(totalConstructor);
@@ -54,18 +54,18 @@ public class SingletonCheckerVisitor {
     }
 
     public boolean gradeA() {
-        return SingletonCheckerVisitor.methodPrinter.hasPrivateConstruct();
+        return SingletonCheckerVisitor.methodVisitor.hasPrivateConstruct();
     }
 
     public boolean gradeB() {
-        return SingletonCheckerVisitor.methodPrinter.publicStaticMethod();
+        return SingletonCheckerVisitor.methodVisitor.publicStaticMethod();
     }
 
     public boolean gradeC() {
-        return SingletonCheckerVisitor.methodPrinter.privateStaticVar();
+        return SingletonCheckerVisitor.methodVisitor.privateStaticVar();
     }
 
     public boolean gradeD() {
-        return SingletonCheckerVisitor.methodPrinter.callConstructorOnce() && (SingletonCheckerVisitor.numConstructor == 1);
+        return SingletonCheckerVisitor.methodVisitor.callConstructorOnce() && (SingletonCheckerVisitor.numConstructor == 1);
     }
 }
