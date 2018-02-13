@@ -13,6 +13,7 @@ public class SingletonCheckerVisitor {
     private static String filename;
     private static File file;
     static MethodPrinter methodPrinter;
+    static int numConstructor;
 
     public static SingletonCheckerVisitor setUpGrader(String filePath, String fileName){
 
@@ -45,6 +46,10 @@ public class SingletonCheckerVisitor {
 
         cu.accept(methodPrinter);
 
+        CheckConstructor totalConstructor = new CheckConstructor();
+        cu.accept(totalConstructor);
+        numConstructor = totalConstructor.count;
+
         return new SingletonCheckerVisitor();
     }
 
@@ -58,5 +63,9 @@ public class SingletonCheckerVisitor {
 
     public boolean gradeC() {
         return SingletonCheckerVisitor.methodPrinter.privateStaticVar();
+    }
+
+    public boolean gradeD() {
+        return SingletonCheckerVisitor.methodPrinter.callConstructorOnce() && (SingletonCheckerVisitor.numConstructor == 1);
     }
 }

@@ -17,6 +17,8 @@ public class MethodPrinter extends ASTVisitor {
 	private boolean hasPrivateConstruct = false;
     private boolean publicStaticMethod = false;
     private boolean privateStaticVar = false;
+    private boolean callConstructor = false;
+    private int constructorNum = 0;
 
 	public boolean visit(MethodDeclaration node) {
 	    boolean findPrivate = false;
@@ -35,9 +37,16 @@ public class MethodPrinter extends ASTVisitor {
 		        findPrivate = true;
 		}
 
-		if(findPublicStatic[0] && findPublicStatic[1])
-		    if(node.getReturnType2().toString().equals("DatabaseManager")) // since it only for hw1 otherwise check it in "SingletonCheckerVisitor"
-		        publicStaticMethod = true;
+		if(findPublicStatic[0] && findPublicStatic[1]) {
+			if (node.getReturnType2().toString().equals("DatabaseManager")) // since it only for hw1 otherwise check it in "SingletonCheckerVisitor"
+				publicStaticMethod = true;
+			IfPrinter ifPrinter = new IfPrinter();
+			node.accept(ifPrinter);
+
+			if(ifPrinter.callConstructor) {
+				callConstructor = true;
+			}
+		}
 
 		if(node.isConstructor() && findPrivate)
 		    hasPrivateConstruct = true;
@@ -63,10 +72,19 @@ public class MethodPrinter extends ASTVisitor {
     }
 
 
+//	public boolean visit(ClassInstanceCreation node) {
+//		CheckConstructor totalConstructor = new CheckConstructor();
+//		node.accept(totalConstructor);
+//		constructorNum = totalConstructor.count;
+//		return false;
+//	}
+
+
+
     public boolean hasPrivateConstruct() {
 	    return hasPrivateConstruct;
     }
-    
+
     public boolean publicStaticMethod() {
         return publicStaticMethod;
     }
@@ -74,4 +92,8 @@ public class MethodPrinter extends ASTVisitor {
     public boolean privateStaticVar() {
         return privateStaticVar;
     }
+
+    public boolean callConstructorOnce() {
+		return callConstructor && (constructorNum < 1);
+	}
 }

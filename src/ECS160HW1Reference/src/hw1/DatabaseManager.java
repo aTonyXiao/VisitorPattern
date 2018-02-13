@@ -13,9 +13,9 @@ package hw1;
  *
  */
 public final class DatabaseManager {
-	
+
 	private static DatabaseManager instance = null;
-	
+
 	public synchronized static DatabaseManager TheDatabaseManager()
 	{
 		if(instance == null)

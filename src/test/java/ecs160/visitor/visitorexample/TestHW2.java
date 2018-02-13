@@ -46,8 +46,7 @@ public class TestHW2 {
 	 */
 	public void Question1a()
 	{
-		System.out.println(q1Grader.gradeA());
-//		assertTrue(q1Grader.gradeA());
+		assertTrue(q1Grader.gradeA());
 	}
 
 	@Test
@@ -68,16 +67,16 @@ public class TestHW2 {
 		assertTrue(q1Grader.gradeC());
 	}
 	
-//	@Test
+	@Test
 	/**
 	 * Check that the constructor is called only once, from the public static method.  
 	 * This call shouldbe inside an if statement.
 	 * (Hint: Look at the ASTNode type ClassInstanceCreation).
 	 */
-//	public void Question1d()
-//	{
-//		assertTrue(q1Grader.gradeD());
-//	}
+	public void Question1d()
+	{
+		assertTrue(q1Grader.gradeD());
+	}
 	
 //	@Test
 	/**
